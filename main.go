@@ -13,6 +13,7 @@ import (
 	term "github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/Masterminds/semver/v3"
 	"github.com/fatih/color"
+	"github.com/integrii/flaggy"
 	"golang.org/x/crypto/ssh/terminal"
 )
 
@@ -170,6 +171,12 @@ func update(modules []Module) {
 }
 
 func main() {
+	version := "0.1.3"
+
+	flaggy.SetName("go-mod-upgrade")
+	flaggy.SetDescription("Update outdated Go dependencies interactively")
+	flaggy.SetVersion(version)
+	flaggy.Parse()
 	modules := discover()
 	if len(modules) > 0 {
 		modules = choose(modules)
